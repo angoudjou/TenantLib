@@ -38,7 +38,7 @@ jobs:
 
      - name: Push to  github registry
        #run: dotnet nuget push src/PersonneClassLibrairy/PersonneClassLibrairy/bin/Release/PersonneClassLibrairy.${{ github.ref_name }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{env.GITHUB_TOKEN}} 
-       run: dotnet nuget push ${{env.PROJECT_PATH}}/bin/Release/${{env.PROJECT_NAME}}.${{ github.ref_name }}.nupkg -k ${{env.NUGET_API_KEY}}  -s https://github.com/angoudjou/TenantLib 
+       run: dotnet nuget push ${{env.PROJECT_PATH}}/bin/Release/${{env.PROJECT_NAME}}.${{ github.ref_name }}.nupkg -k ${{env.NUGET_API_KEY}}  -s "github"
        env:
          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
          
