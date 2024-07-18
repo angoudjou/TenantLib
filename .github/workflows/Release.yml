@@ -8,7 +8,9 @@ on:
 env:
   APP_PATH : src/TenantPlugIn/TenantPlugIn.csproj
   PUBLISH_PATH: ./publish
-
+  PROJECT_NAME: TenantPlugIn
+permissions: 
+  contents: write
 jobs:
   Build:
     runs-on: windows-latest
@@ -19,17 +21,14 @@ jobs:
        run: | 
         dotnet build ${{env.APP_PATH}} -c release -o ${{env.PUBLISH_PATH}}  
         dir ${{env.PUBLISH_PATH}} 
-     - name: Creating release
-       uses: ncipollo/release-action@v1
+     - name: Pack
+       run: dotnet pack ${{env.APP_PATH}} -c Release -p:PackageVersion=${{ github.ref_name }}
+    
+     - name: Push to  github registry
+       #run: dotnet nuget push src/PersonneClassLibrairy/PersonneClassLibrairy/bin/Release/PersonneClassLibrairy.${{ github.ref_name }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{env.GITHUB_TOKEN}} 
+       run: dotnet nuget push ${{env.APP_PATH}}/bin/Release/${{env.PROJECT_NAME}}.${{ github.ref_name }}.nupkg -k ${{env.GITHUB_TOKEN}} 
        env:
-         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-       with:
-          artifacts: ${{env.PUBLISH_PATH}}
-          omitBody: true 
-          tag_name: ${{github.ref}}
-          release_name: Release${{github.ref}}
-          draft: false
-          prerelease: true
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
            
     
  
