@@ -6,7 +6,7 @@ on:
    paths-ignore: 
     - '**.md'
 env:
-  APP_PATH : 'src/TenantPlugIn/TenantPlugIn.csproj'
+  APP_PATH : src/TenantPlugIn/TenantPlugIn.csproj
   PUBLISH_PATH: ./publish
 
 jobs:
