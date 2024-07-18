@@ -17,8 +17,8 @@ jobs:
        uses: actions/checkout@v4.1.7
      - name : setup Dotnet
        run: | 
-        dotnet build env.APP_PATH -c release -o env.PUBLISH_PATH  
-        dir env.PUBLISH_PATH
+        dotnet build $APP_PATH -c release -o $PUBLISH_PATH  
+        dir $PUBLISH_PATH
      - name: Creating release
        uses: ncipollo/release-action@v1
        with:
