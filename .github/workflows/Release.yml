@@ -21,9 +21,15 @@ jobs:
         dir ${{env.PUBLISH_PATH}} 
      - name: Creating release
        uses: ncipollo/release-action@v1
+       env:
+         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
        with:
           artifacts: ${{env.PUBLISH_PATH}}
           omitBody: true 
+          tag_name: ${{github.ref}}
+          release_name: Release${{github.ref}}
+          draft: false
+          prerelease: true
            
     
  
