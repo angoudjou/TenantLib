@@ -22,7 +22,8 @@ jobs:
      - name: Creating release
        uses: ncipollo/release-action@v1
        with:
-          artifacts: ${{env.PUBLISH_PATH}} 
+          artifacts: ${{env.PUBLISH_PATH}}
+          omitBody: true 
            
     
  
